@@ -18,7 +18,7 @@ var CONTACT = {
   site: "https://www.kubraterzioglu.com",
   linkedin: "https://www.linkedin.com/in/kubra-terzioglu/",
   kaggle: "https://www.kaggle.com/kubraterz",
-  medium: "https://medium.com/@kubraterzioglu"
+  medium: "https://medium.com/@kubra_terzioglu"
 };
 
 function buildVCard() {
