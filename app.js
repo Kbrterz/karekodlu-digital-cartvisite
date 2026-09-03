@@ -131,3 +131,12 @@ if (form) {
 /* --------------------------- ufak dokunuşlar ----------------------------- */
 var yr = document.getElementById("yr");
 if (yr) yr.textContent = new Date().getFullYear();
+
+/* --------------------------- PWA service worker ------------------------- */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function (e) {
+      console.warn("[kartvizit] SW kaydı başarısız:", e);
+    });
+  });
+}
