@@ -38,18 +38,18 @@ Form → n8n webhook → Google Sheet + Kübra'ya e-posta bildirimi.
 
 ## GitHub Pages'e yayınlama
 
-GitHub kullanıcı: **Kbrterz** → yayın URL'si: `https://kbrterz.github.io/digital-cartvizit/`
+GitHub kullanıcı: **Kbrterz** → yayın URL'si: `https://kbrterz.github.io/Karekodlu-digital-cartvisite/`
 
-1. GitHub repo: `Kbrterz/digital-cartvizit` (public, boş).
+1. GitHub repo: `Kbrterz/Karekodlu-digital-cartvisite` (public, boş).
 2. Bu klasör zaten `git init` + commit ile hazır. Push et:
    ```bash
    cd "C:\Users\terzi\Desktop\dijital-kartvizit"
-   git remote add origin https://github.com/Kbrterz/digital-cartvizit.git
+   git remote add origin https://github.com/Kbrterz/Karekodlu-digital-cartvisite.git
    git push -u origin main
    ```
    (Push'ta GitHub kullanıcı adı + Personal Access Token istenir.)
 3. Repo → **Settings → Pages** → Source: `Deploy from a branch`, Branch: `main` / `root` → Save.
-4. 1-2 dk sonra canlı: `https://kbrterz.github.io/digital-cartvizit/`
+4. 1-2 dk sonra canlı: `https://kbrterz.github.io/Karekodlu-digital-cartvisite/`
 5. QR kod `qr.png` olarak hazır (bu URL'ye işaret ediyor). Değiştirmek istersen `qr.html`'i aç.
 
 ## Düzenlemek istersen
