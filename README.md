@@ -31,7 +31,7 @@ Form → n8n webhook → Google Sheet + Kübra'ya e-posta bildirimi.
 - Webhook (prod): `POST https://kubrat.app.n8n.cloud/webhook/kartvizit-baglanti`
 - Akış: Webhook → Parse & Doğrula (Code) → Geçerli mi? (If) → Satır (Set) → Sheet'e Ekle → Kübra'ya Bildir (Gmail) → 200 OK
 - Google Sheet: **Kübra — Network Bağlantıları**
-  `https://docs.google.com/spreadsheets/d/18chJwyCOdTLZW3qWdtsAPROJOe9ZxE14v3swe4v3Qqw/edit`
+  `https://docs.google.com/spreadsheets/d/1b8QwjoX1sF9_d1SpBTfC4sCGA9sA6OGLxWLcVqgr7v0/edit`
   Başlık satırı ilk gerçek kayıtta otomatik oluşur.
 - Bildirim e-postası: `kubraterzioglu06@gmail.com` (Gmail OAuth2 API credential)
 - Kullanılan credential'lar: `Google Sheets OAuth2 API`, `Gmail OAuth2 API` (ikisi de mevcut)
