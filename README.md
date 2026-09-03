@@ -31,12 +31,19 @@ Form → n8n webhook → Google Sheet + Kübra'ya e-posta bildirimi.
 - Webhook (prod): `POST https://kubrat.app.n8n.cloud/webhook/kartvizit-baglanti`
 - Akış: Webhook → Parse & Doğrula (Code) → Geçerli mi? (If) → Satır (Set) → Sheet'e Ekle → Kübra'ya Bildir (Gmail) → 200 OK
 - Google Sheet: **Kübra — Network Bağlantıları**
-  `https://docs.google.com/spreadsheets/d/1RCWAOkVFZ0OZh6ef02Zx8YFrjrzTb8_tR_x3k3XpGRA/edit`
+  `https://docs.google.com/spreadsheets/d/18chJwyCOdTLZW3qWdtsAPROJOe9ZxE14v3swe4v3Qqw/edit`
   Başlık satırı ilk gerçek kayıtta otomatik oluşur.
 - Bildirim e-postası: `kubraterzioglu06@gmail.com` (Gmail OAuth2 API credential)
 - Kullanılan credential'lar: `Google Sheets OAuth2 API`, `Gmail OAuth2 API` (ikisi de mevcut)
 
-## GitHub Pages'e yayınlama
+## Canlı sürümler
+
+**A) Claude Artifact (anında çalışıyor):**
+`https://claude.ai/code/artifact/cbbadcd7-2fe6-41d3-a8d2-e2b0eecddc7f`
+QR: `qr-canli.png`. Tek dosya, foto gömülü, CV linki GitHub raw'a gidiyor.
+> Başkalarının okutabilmesi için Artifact'i **Share** menüsünden herkese açık yapmak gerekir. "Rehbere ekle" gömülü görüntüleyicide indirme yerine data: URL açar (mobilde kişi kartı gelir).
+
+**B) GitHub Pages (kalıcı, kendi alan adın):**
 
 GitHub kullanıcı: **Kbrterz** → yayın URL'si: `https://kbrterz.github.io/karekodlu-digital-cartvisite/`
 

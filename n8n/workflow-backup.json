@@ -73,7 +73,7 @@
       "position": [880, -100],
       "parameters": {
         "operation": "append",
-        "documentId": { "__rl": true, "mode": "id", "value": "1RCWAOkVFZ0OZh6ef02Zx8YFrjrzTb8_tR_x3k3XpGRA" },
+        "documentId": { "__rl": true, "mode": "id", "value": "18chJwyCOdTLZW3qWdtsAPROJOe9ZxE14v3swe4v3Qqw" },
         "sheetName": { "__rl": true, "mode": "name", "value": "Sayfa1" },
         "columns": { "mappingMode": "autoMapInputData", "value": {}, "matchingColumns": [], "schema": [] },
         "options": {}
@@ -95,7 +95,7 @@
         "sendTo": "kubraterzioglu06@gmail.com",
         "subject": "={{ 'Yeni bağlantı: ' + $('Satır').item.json['Ad Soyad'] + ' (' + $('Satır').item.json['İşyeri'] + ')' }}",
         "emailType": "text",
-        "message": "={{ 'Dijital kartvizitinden yeni bir bağlantı geldi:\\n\\n' + 'Ad Soyad : ' + $('Satır').item.json['Ad Soyad'] + '\\n' + 'Ünvan    : ' + $('Satır').item.json['Ünvan'] + '\\n' + 'İşyeri   : ' + $('Satır').item.json['İşyeri'] + '\\n' + 'E-posta  : ' + $('Satır').item.json['E-posta'] + '\\n' + 'CV       : ' + ($('Satır').item.json['CV Linki'] || '-') + '\\n' + 'Tarih    : ' + $('Satır').item.json['Tarih'] + '\\n\\n' + 'Tüm liste: https://docs.google.com/spreadsheets/d/1RCWAOkVFZ0OZh6ef02Zx8YFrjrzTb8_tR_x3k3XpGRA/edit' }}",
+        "message": "={{ 'Dijital kartvizitinden yeni bir bağlantı geldi:\\n\\n' + 'Ad Soyad : ' + $('Satır').item.json['Ad Soyad'] + '\\n' + 'Ünvan    : ' + $('Satır').item.json['Ünvan'] + '\\n' + 'İşyeri   : ' + $('Satır').item.json['İşyeri'] + '\\n' + 'E-posta  : ' + $('Satır').item.json['E-posta'] + '\\n' + 'CV       : ' + ($('Satır').item.json['CV Linki'] || '-') + '\\n' + 'Tarih    : ' + $('Satır').item.json['Tarih'] + '\\n\\n' + 'Tüm liste: https://docs.google.com/spreadsheets/d/18chJwyCOdTLZW3qWdtsAPROJOe9ZxE14v3swe4v3Qqw/edit' }}",
         "options": { "appendAttribution": false }
       },
       "credentials": {
