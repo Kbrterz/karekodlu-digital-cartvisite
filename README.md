@@ -36,28 +36,21 @@ Form → n8n webhook → Google Sheet + Kübra'ya e-posta bildirimi.
 - Bildirim e-postası: `kubraterzioglu06@gmail.com` (Gmail OAuth2 API credential)
 - Kullanılan credential'lar: `Google Sheets OAuth2 API`, `Gmail OAuth2 API` (ikisi de mevcut)
 
-## Canlı sürümler
+## Canlı (ÇALIŞAN sürüm) — GitHub Pages
 
-**A) Claude Artifact (anında çalışıyor):**
-`https://claude.ai/code/artifact/cbbadcd7-2fe6-41d3-a8d2-e2b0eecddc7f`
-QR: `qr-canli.png`. Tek dosya, foto gömülü, CV linki GitHub raw'a gidiyor.
-> Başkalarının okutabilmesi için Artifact'i **Share** menüsünden herkese açık yapmak gerekir. "Rehbere ekle" gömülü görüntüleyicide indirme yerine data: URL açar (mobilde kişi kartı gelir).
+Repo: `github.com/Kbrterz/karekodlu-digital-cartvisite` (public). Pages AÇIK.
 
-**B) GitHub Pages (kalıcı, kendi alan adın):**
+| Ne | URL |
+|---|---|
+| **Kartvizit** (QR bunu açar) | `https://kbrterz.github.io/karekodlu-digital-cartvisite/` |
+| **QR kod resmi** | `https://kbrterz.github.io/karekodlu-digital-cartvisite/qr.png` |
+| **QR sayfası** (yazdır/göster) | `https://kbrterz.github.io/karekodlu-digital-cartvisite/qr.html` |
 
-GitHub kullanıcı: **Kbrterz** → yayın URL'si: `https://kbrterz.github.io/karekodlu-digital-cartvisite/`
+Uçtan uca test edildi (canlı siteden gerçek tarayıcı submit → Sheet'e satır, Türkçe karakterler temiz).
 
-1. GitHub repo: `Kbrterz/karekodlu-digital-cartvisite` (public, boş).
-2. Bu klasör zaten `git init` + commit ile hazır. Push et:
-   ```bash
-   cd "C:\Users\terzi\Desktop\dijital-kartvizit"
-   git remote add origin https://github.com/Kbrterz/karekodlu-digital-cartvisite.git
-   git push -u origin main
-   ```
-   (Push'ta GitHub kullanıcı adı + Personal Access Token istenir.)
-3. Repo → **Settings → Pages** → Source: `Deploy from a branch`, Branch: `main` / `root` → Save.
-4. 1-2 dk sonra canlı: `https://kbrterz.github.io/karekodlu-digital-cartvisite/`
-5. QR kod `qr.png` olarak hazır (bu URL'ye işaret ediyor). Değiştirmek istersen `qr.html`'i aç.
+> **Not:** Claude Artifact sürümü (`cbbadcd7-...`) sadece kartviziti GÖSTERİR — form gönderemez (artifact dış sunucuya erişemez). Gerçek/çalışan sürüm GitHub Pages.
+
+Değiştir: `git push` sonrası Pages otomatik yeniden yayınlar.
 
 ## Düzenlemek istersen
 
