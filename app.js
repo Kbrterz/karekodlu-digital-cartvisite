@@ -18,7 +18,8 @@ var CONTACT = {
   site: "https://www.kubraterzioglu.com",
   linkedin: "https://www.linkedin.com/in/kubra-terzioglu/",
   kaggle: "https://www.kaggle.com/kubraterz",
-  medium: "https://medium.com/@kubra_terzioglu"
+  medium: "https://medium.com/@kubra_terzioglu",
+  github: "https://github.com/Kbrterz"
 };
 
 function buildVCard() {
@@ -38,6 +39,8 @@ function buildVCard() {
     "item2.X-ABLabel:Kaggle",
     "item3.URL:" + CONTACT.medium,
     "item3.X-ABLabel:Medium",
+    "item4.URL:" + CONTACT.github,
+    "item4.X-ABLabel:GitHub",
     "REV:" + new Date().toISOString(),
     "END:VCARD"
   ];
