@@ -17,7 +17,7 @@ var CONTACT = {
   email: "kubraterzioglu06@gmail.com",
   site: "https://www.kubraterzioglu.com",
   linkedin: "https://www.linkedin.com/in/kubra-terzioglu/",
-  kaggle: "https://www.kaggle.com/kbrterz",
+  kaggle: "https://www.kaggle.com/kubraterz",
   medium: "https://medium.com/@kubraterzioglu"
 };
 
