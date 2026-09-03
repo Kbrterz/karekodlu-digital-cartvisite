@@ -182,6 +182,18 @@ body{
 .form.done .field,.form.done .submit{display:none}
 .form.done .form__msg{font-size:.95rem;font-weight:500}
 
+.share{text-align:center}
+.share__qr{
+  margin-top:14px;
+  display:inline-block;
+  padding:14px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  line-height:0;
+}
+.share__qr img{width:200px;height:200px;display:block}
+
 .foot{margin-top:22px;text-align:center;font-size:.76rem;color:var(--muted)}
 
 @media (max-width:360px){
