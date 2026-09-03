@@ -10,7 +10,7 @@ Form → n8n webhook → Google Sheet + Kübra'ya e-posta bildirimi.
 | `index.html` | Kartvizit sayfası (linkler, vCard butonu, bağlantı formu) |
 | `styles.css` | Tasarım |
 | `app.js` | vCard üretimi + form gönderimi (n8n webhook) |
-| `assets/kubra.png` | Profil foto (AI headshot — `AI-PHOTO\03395bd2...e2e6e.0.png`) |
+| `assets/kubra.jpg` | Profil foto (gri blazer, baş-omuz kırpım) |
 | `assets/kubra-terzioglu-cv.pdf` | CV (kaynak: `Downloads\Kubra_Terzioglu_CV (2).pdf`, 18 Ağu) |
 | `qr.html` | Yayınlanan URL için QR kod üretici (indir butonlu) |
 | `n8n/workflow-backup.json` | n8n workflow yedeği (import edilebilir) |
@@ -57,5 +57,5 @@ GitHub kullanıcı: **Kbrterz** → yayın URL'si: `https://kbrterz.github.io/ka
 - Metin / linkler: `index.html`
 - vCard içeriği: `app.js` içindeki `CONTACT` objesi
 - Renk: `styles.css` en üstteki `--accent` vs.
-- Foto değiştir: `assets/kubra.png` üzerine yaz (kare/dikey, yüz üstte)
+- Foto değiştir: `assets/kubra.jpg` üzerine yaz (kare, baş-omuz)
 - Webhook URL değişirse: `app.js` içindeki `N8N_WEBHOOK_URL`
