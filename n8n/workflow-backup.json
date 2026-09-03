@@ -125,6 +125,26 @@
         "responseBody": "={{ { \"ok\": false, \"reason\": $json.reason } }}",
         "options": { "responseCode": 400, "responseHeaders": { "entries": [ { "name": "Access-Control-Allow-Origin", "value": "*" } ] } }
       }
+    },
+    {
+      "id": "thanks",
+      "name": "Teşekkür Maili",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [1320, 40],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $('Satır').item.json['E-posta'] }}",
+        "subject": "Bağlantı için teşekkürler — Kübra Terzioğlu",
+        "emailType": "text",
+        "message": "={{ 'Merhaba ' + $('Satır').item.json['Ad Soyad'] + ',\\n\\n' + 'Dijital kartvizitim üzerinden bilgilerini bıraktığın için teşekkür ederim. Bilgilerini aldım, en kısa sürede seninle iletişime geçeceğim.\\n\\n' + 'Bu arada bağlantıda kalalım:\\n' + 'LinkedIn: https://www.linkedin.com/in/kubra-terzioglu/\\n' + 'Web: https://www.kubraterzioglu.com\\n\\n' + 'Sevgiler,\\n' + 'Kübra Terzioğlu\\n' + 'Senior Project Manager — Aerospace, Defense & Data Analysis' }}",
+        "options": { "appendAttribution": false }
+      },
+      "credentials": {
+        "gmailOAuth2": { "id": "FNrxVa70y0Vl9Mfx", "name": "Gmail OAuth2 API" }
+      }
     }
   ],
   "connections": {
@@ -133,7 +153,8 @@
     "Geçerli mi?": { "main": [[{ "node": "Satır", "type": "main", "index": 0 }], [{ "node": "400 Hatalı", "type": "main", "index": 0 }]] },
     "Satır": { "main": [[{ "node": "Sheet'e Ekle", "type": "main", "index": 0 }]] },
     "Sheet'e Ekle": { "main": [[{ "node": "Kübra'ya Bildir", "type": "main", "index": 0 }]] },
-    "Kübra'ya Bildir": { "main": [[{ "node": "200 OK", "type": "main", "index": 0 }]] }
+    "Kübra'ya Bildir": { "main": [[{ "node": "Teşekkür Maili", "type": "main", "index": 0 }]] },
+    "Teşekkür Maili": { "main": [[{ "node": "200 OK", "type": "main", "index": 0 }]] }
   },
   "settings": { "executionOrder": "v1", "timezone": "Europe/Istanbul", "saveManualExecutions": true }
 }
