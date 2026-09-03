@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kartvizit QR</title>
+<style>
+  body{margin:0;font-family:'Inter',system-ui,Segoe UI,sans-serif;background:#F7F4EF;color:#1C1B19;
+       display:flex;flex-direction:column;align-items:center;gap:18px;padding:40px 16px}
+  h1{font-weight:600;font-size:1.15rem;margin:0}
+  input{width:min(520px,90vw);padding:11px 13px;border:1px solid #E8E3D9;border-radius:10px;font:inherit;background:#fff}
+  #box{background:#fff;padding:22px;border:1px solid #E8E3D9;border-radius:16px;line-height:0}
+  a.btn{padding:11px 18px;border-radius:10px;background:#0E6E64;color:#fff;text-decoration:none;font-weight:600;font-size:.92rem}
+  small{color:#6B6862}
+</style>
+</head>
+<body>
+  <h1>Dijital kartvizit — QR kod</h1>
+  <input id="url" value="https://kbrterz.github.io/dijital-kartvizit/" />
+  <div id="box"><canvas id="cv"></canvas></div>
+  <a id="dl" class="btn" download="kartvizit-qr.png">PNG indir</a>
+  <small>URL'yi değiştir → QR anında güncellenir.</small>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  // qrcodejs renders into a div; we mirror to canvas for a clean PNG download
+  var holder = document.createElement('div');
+  var url = document.getElementById('url');
+  var dl = document.getElementById('dl');
+  var box = document.getElementById('box');
+
+  function render(){
+    holder.innerHTML = '';
+    new QRCode(holder, { text: url.value || ' ', width: 900, height: 900, correctLevel: QRCode.CorrectLevel.M });
+    setTimeout(function(){
+      var img = holder.querySelector('img') || holder.querySelector('canvas');
+      box.innerHTML = '';
+      var shown = img.cloneNode(true);
+      shown.style.width = '260px'; shown.style.height = '260px';
+      box.appendChild(shown);
+      var src = img.tagName === 'IMG' ? img.src : img.toDataURL('image/png');
+      dl.href = src;
+    }, 60);
+  }
+  url.addEventListener('input', render);
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+{
+  "name": "Dijital Kartvizit — Network Bağlantıları",
+  "nodes": [
+    {
+      "id": "webhook",
+      "name": "Kartvizit Form",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "kartvizit-baglanti",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "code",
+      "name": "Parse & Doğrula",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 0],
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const item = $input.first().json;\nlet d = item.body;\nif (typeof d === 'string') { try { d = JSON.parse(d); } catch (e) { d = {}; } }\nif (!d || typeof d !== 'object') d = {};\n\nconst clean = (s, n = 300) => String(s == null ? '' : s).replace(/\\s+/g, ' ').trim().slice(0, n);\nconst name = clean(d.name, 120);\nconst title = clean(d.title, 120);\nconst company = clean(d.company, 120);\nconst email = clean(d.email, 180).toLowerCase();\nconst cv = clean(d.cv, 400);\nconst hp = clean(d.website_hp, 50);\nconst source = clean(d.source, 60) || 'dijital-kartvizit';\n\nconst emailOk = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);\nconst ok = !hp && !!name && !!title && !!company && emailOk;\nconst reason = hp ? 'honeypot' : ((!name || !title || !company) ? 'missing_fields' : (!emailOk ? 'bad_email' : 'ok'));\n\nconst tarih = new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' });\n\nreturn [{ json: {\n  ok: ok,\n  reason: reason,\n  'Tarih': tarih,\n  'Ad Soyad': name,\n  'Ünvan': title,\n  'İşyeri': company,\n  'E-posta': email,\n  'CV Linki': cv,\n  'Kaynak': source\n} }];"
+      }
+    },
+    {
+      "id": "iff",
+      "name": "Geçerli mi?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [440, 0],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 2 },
+          "combinator": "and",
+          "conditions": [
+            { "id": "cond1", "leftValue": "={{ $json.ok }}", "rightValue": true, "operator": { "type": "boolean", "operation": "true", "singleValue": true } }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "setrow",
+      "name": "Satır",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [660, -100],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": false,
+        "assignments": {
+          "assignments": [
+            { "id": "s1", "name": "Tarih", "type": "string", "value": "={{ $json['Tarih'] }}" },
+            { "id": "s2", "name": "Ad Soyad", "type": "string", "value": "={{ $json['Ad Soyad'] }}" },
+            { "id": "s3", "name": "Ünvan", "type": "string", "value": "={{ $json['Ünvan'] }}" },
+            { "id": "s4", "name": "İşyeri", "type": "string", "value": "={{ $json['İşyeri'] }}" },
+            { "id": "s5", "name": "E-posta", "type": "string", "value": "={{ $json['E-posta'] }}" },
+            { "id": "s6", "name": "CV Linki", "type": "string", "value": "={{ $json['CV Linki'] }}" },
+            { "id": "s7", "name": "Kaynak", "type": "string", "value": "={{ $json['Kaynak'] }}" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "sheet",
+      "name": "Sheet'e Ekle",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [880, -100],
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "mode": "id", "value": "1RCWAOkVFZ0OZh6ef02Zx8YFrjrzTb8_tR_x3k3XpGRA" },
+        "sheetName": { "__rl": true, "mode": "name", "value": "Sayfa1" },
+        "columns": { "mappingMode": "autoMapInputData", "value": {}, "matchingColumns": [], "schema": [] },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": { "id": "JcUIlP55B5aB4zBj", "name": "Google Sheets OAuth2 API" }
+      }
+    },
+    {
+      "id": "gmail",
+      "name": "Kübra'ya Bildir",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [1100, -100],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "kubraterzioglu06@gmail.com",
+        "subject": "={{ 'Yeni bağlantı: ' + $('Satır').item.json['Ad Soyad'] + ' (' + $('Satır').item.json['İşyeri'] + ')' }}",
+        "emailType": "text",
+        "message": "={{ 'Dijital kartvizitinden yeni bir bağlantı geldi:\\n\\n' + 'Ad Soyad : ' + $('Satır').item.json['Ad Soyad'] + '\\n' + 'Ünvan    : ' + $('Satır').item.json['Ünvan'] + '\\n' + 'İşyeri   : ' + $('Satır').item.json['İşyeri'] + '\\n' + 'E-posta  : ' + $('Satır').item.json['E-posta'] + '\\n' + 'CV       : ' + ($('Satır').item.json['CV Linki'] || '-') + '\\n' + 'Tarih    : ' + $('Satır').item.json['Tarih'] + '\\n\\n' + 'Tüm liste: https://docs.google.com/spreadsheets/d/1RCWAOkVFZ0OZh6ef02Zx8YFrjrzTb8_tR_x3k3XpGRA/edit' }}",
+        "options": { "appendAttribution": false }
+      },
+      "credentials": {
+        "gmailOAuth2": { "id": "FNrxVa70y0Vl9Mfx", "name": "Gmail OAuth2 API" }
+      }
+    },
+    {
+      "id": "respok",
+      "name": "200 OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [1320, -100],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"ok\": true } }}",
+        "options": { "responseCode": 200, "responseHeaders": { "entries": [ { "name": "Access-Control-Allow-Origin", "value": "*" } ] } }
+      }
+    },
+    {
+      "id": "resperr",
+      "name": "400 Hatalı",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [660, 120],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"ok\": false, \"reason\": $json.reason } }}",
+        "options": { "responseCode": 400, "responseHeaders": { "entries": [ { "name": "Access-Control-Allow-Origin", "value": "*" } ] } }
+      }
+    }
+  ],
+  "connections": {
+    "Kartvizit Form": { "main": [[{ "node": "Parse & Doğrula", "type": "main", "index": 0 }]] },
+    "Parse & Doğrula": { "main": [[{ "node": "Geçerli mi?", "type": "main", "index": 0 }]] },
+    "Geçerli mi?": { "main": [[{ "node": "Satır", "type": "main", "index": 0 }], [{ "node": "400 Hatalı", "type": "main", "index": 0 }]] },
+    "Satır": { "main": [[{ "node": "Sheet'e Ekle", "type": "main", "index": 0 }]] },
+    "Sheet'e Ekle": { "main": [[{ "node": "Kübra'ya Bildir", "type": "main", "index": 0 }]] },
+    "Kübra'ya Bildir": { "main": [[{ "node": "200 OK", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1", "timezone": "Europe/Istanbul", "saveManualExecutions": true }
+}
